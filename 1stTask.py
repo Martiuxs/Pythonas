@@ -1,5 +1,11 @@
 import requests
 import json
+import default_config
+
+router_ip = default_config.router_ip
+username = default_config.username
+password = default_config.password
+config_file = default_config.config_file
 
 # Function to authenticate with the router's API
 def authenticate(router_ip, username, password):
@@ -48,25 +54,21 @@ def load_config(file_path):
         print(f"Error: Invalid JSON format in {file_path}")
         return None
 
-router_ip = '192.168.1.1'  
-username = 'admin' 
-password = 'Admin123'  
-config_file = 'config.json' 
-
-# Authenticate with the router's API
-access_token = authenticate(router_ip, username, password)
-
-if access_token:
-
-    rule_payload = load_config(config_file)
 
 
-    create_event_reporting_rule(router_ip, access_token, rule_payload['create_data'])
+def main():
+    # Authenticate with the router's API
+    access_token = authenticate(router_ip, username, password)
 
-if access_token:
-    rule_id = 'cfg0292bd' 
+    if access_token:
+        rule_payload = load_config(config_file)
+        create_event_reporting_rule(router_ip, access_token, rule_payload['create_data'])
 
-    modify_payload = load_config(config_file)
+    if access_token:
+        rule_id = 'cfg0192bd'
+        modify_payload = load_config(config_file)
+        modify_event_reporting_rule(router_ip, access_token, rule_id, modify_payload['modify_data'])
 
-
-    modify_event_reporting_rule(router_ip, access_token, rule_id, modify_payload['modify_data'])
+# Call the main function
+if __name__ == '__main__':
+    main()
