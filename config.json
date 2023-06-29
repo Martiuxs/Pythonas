@@ -1,0 +1,20 @@
+{
+  "create_data": {
+    "data":{
+    ".type": "rule",
+    "action": "sendSMS",
+    "enable": "1",
+    "telnum": "+897456286",
+    "event": "Config",
+    "message": "Router name - %rn; Event type - %et; Event text - %ex; Time stamp - %ts",
+    "recipient_format": "single",
+    "eventMark": "wireless",
+    "id": "cfg0292bd",
+    "recipEmail": ""}
+  },
+  "modify_data": {
+    "data": {
+    "id": "cfg0292bd",
+    ".type": "rule"}
+  }
+}
