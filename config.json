@@ -1,5 +1,5 @@
 {
-  "create_data": {
+  "modify_data": {
     "data":{
     ".type": "rule",
     "action": "sendSMS",
@@ -12,7 +12,7 @@
     "id": "cfg0292bd",
     "recipEmail": ""}
   },
-  "modify_data": {
+  "create_data": {
     "data": {
     "id": "cfg0292bd",
     ".type": "rule"}

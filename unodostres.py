@@ -47,28 +47,26 @@ def load_config(file_path):
     except json.JSONDecodeError:
         print(f"Error: Invalid JSON format in {file_path}")
         return None
-# Usage example
-router_ip = '192.168.1.1'  # Replace with your router's IP address
-username = 'admin'  # Replace with your router's username
-password = 'Admin123'  # Replace with your router's password
-config_file = 'config.json'  # Replace with the path to your JSON configuration file
+
+router_ip = '192.168.1.1'  
+username = 'admin' 
+password = 'Admin123'  
+config_file = 'config.json' 
 
 # Authenticate with the router's API
 access_token = authenticate(router_ip, username, password)
 
 if access_token:
-    # Load the config from the JSON file for rule_payload
+
     rule_payload = load_config(config_file)
-    # Add other necessary fields to the rule_payload dictionary if needed
+
 
     create_event_reporting_rule(router_ip, access_token, rule_payload['create_data'])
 
 if access_token:
     rule_id = 'cfg0292bd' 
 
-    # Load the config from the JSON file for modify_payload
     modify_payload = load_config(config_file)
 
-    # Add other necessary fields to the modify_payload dictionary if needed
 
     modify_event_reporting_rule(router_ip, access_token, rule_id, modify_payload['modify_data'])
