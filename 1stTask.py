@@ -1,24 +1,12 @@
 import requests
 import json
 import default_config
+from authentication import authenticate
 
 router_ip = default_config.router_ip
 username = default_config.username
 password = default_config.password
 config_file = default_config.config_file
-
-# Function to authenticate with the router's API
-def authenticate(router_ip, username, password):
-    auth_url = f"http://{router_ip}/api/login"
-    response = requests.post(auth_url, json={"username": username, "password": password})
-    
-    if response.status_code == 200:
-        access_token = response.json().get('ubus_rpc_session')
-        print("Authentication successful!")
-        return access_token
-    else:
-        print("Authentication failed.")
-        return None
 
 # Function to create an event reporting rule for Wi-Fi configuration changes
 def create_event_reporting_rule(router_ip, access_token, rule_payload):
@@ -51,10 +39,7 @@ def load_config(file_path):
             config = json.load(file)
             return config
     except json.JSONDecodeError:
-        print(f"Error: Invalid JSON format in {file_path}")
-        return None
-
-
+     raise ValueError(f"Error: Invalid JSON format in {file_path}")
 
 def main():
     # Authenticate with the router's API
